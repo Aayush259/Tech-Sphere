@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import img1 from '../../images/slider-1.jpg';
 import img2 from '../../images/slider-2.jpg';
 import img3 from '../../images/slider-3.jpg';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function Carousel() {
 
+    // Array of all slider images.
     const imgArray = [img1, img2, img3];
 
+    // Current slider image index state from imgArray.
     const [currentSlide, setCurrentSlide] = useState(0);
 
+    // Function to shift to next slide.
     const nextSlide = () => {
         const isLastSlide = currentSlide === imgArray.length - 1;
         const nextSlideIndex = isLastSlide ? 0 : currentSlide + 1;
@@ -33,7 +35,7 @@ export default function Carousel() {
             ></div>
 
             <div
-                className="absolute bottom-5 left-1/2 flex flex-row gap-4"
+                className="absolute bottom-5 left-[45%] md:left-1/2 flex flex-row gap-4"
             >
 
                 {
