@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import appLogo from '../../images/logo.jpg';
 import { Link } from 'react-router-dom';
-import NavigationLink from './NavigationLink';
+import appLogo from '../../images/logo.jpg';
+import NavigationLink from './NavigationLink.jsx';
 
 export default function Nav() {
 
