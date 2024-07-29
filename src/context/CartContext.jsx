@@ -17,10 +17,10 @@ const CartContextProvider = ({ children }) => {
     }, [cartItems]);
 
     // Function to increment count of item in cart.
-    const incrementItemCount = (itemName) => {
+    const incrementItemCount = (productId) => {
         setCartItems(prevCartItems => {
             const updatedItems = prevCartItems.map(item => {
-                if (item.name === itemName) {
+                if (item['_id'] === productId) {
                     return { ...item, count: item['count'] + 1 };
                 }
 
@@ -32,10 +32,10 @@ const CartContextProvider = ({ children }) => {
     };
 
     // Function to decrement count of item in cart.
-    const decrementItemCount = (itemName) => {
+    const decrementItemCount = (productId) => {
         setCartItems(prevCartItems => {
             const updatedItems = prevCartItems.map(item => {
-                if ((item.name === itemName) && (item['count'] > 0)) {
+                if ((item['_id'] === productId) && (item['count'] > 0)) {
                     return { ...item, count: item['count'] - 1 };
                 }
 
@@ -50,7 +50,7 @@ const CartContextProvider = ({ children }) => {
     const addItemToCart = (item) => {
         setCartItems(prevCartItems => {
 
-            const itemIndex = prevCartItems.findIndex(cartItem => cartItem['name'] === item['name']);
+            const itemIndex = prevCartItems.findIndex(cartItem => cartItem['_id'] === item['_id']);
 
             if (itemIndex !== -1) {
                 // Item already in cart, increment its count
@@ -65,13 +65,13 @@ const CartContextProvider = ({ children }) => {
     };
 
     // Function to remove item from cart.
-    const removeItemFromCart = (itemName) => {
-        setCartItems(prevCartItems => prevCartItems.filter(item => item['name'] !== itemName));
+    const removeItemFromCart = (productId) => {
+        setCartItems(prevCartItems => prevCartItems.filter(item => item['_id'] !== productId));
     };
 
     // Function to check whether an item is in cart or not.
-    const isItemInCart = (itemName) => {
-        return cartItems.some(item => item['name'] === itemName);
+    const isItemInCart = (productId) => {
+        return cartItems.some(item => item['_id'] === productId);
     };
 
     return (

@@ -9,18 +9,19 @@ export default function ProductCard({ productDetails }) {
     // Getting functions to manage cart.
     const { addItemToCart, removeItemFromCart, isItemInCart } = useCartData();
 
-    // Getting product name, price and image.
+    // Extracting product details.
+    const productId = productDetails['_id'];
     const productName = productDetails['name'];
     const productPrice = productDetails['price'] || 10000;
     const productImage = productDetails['image'];
 
     // State to check whether item is present in cart or not.
-    const [isAddedInCart, setIsAddedInCart] = useState(isItemInCart(productName));
+    const [isAddedInCart, setIsAddedInCart] = useState(isItemInCart(productId));
 
     // Function to handle cart action to add and remove product from cart.
     const handleCartAction = () => {
-        if (isAddedInCart) {
-            removeItemFromCart(productName);
+        if (isItemInCart(productId)) {
+            removeItemFromCart(productId);
         } else {
             addItemToCart(productDetails);
         };
