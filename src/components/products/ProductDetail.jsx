@@ -8,17 +8,18 @@ export default function ProductDetail() {
     // Getting product data from context.
     const { data, loading, error } = useProductData();
 
-    const [productDetail, setProductDetail] = useState([]);
+    // State for the product whose detail has to be shown.
+    const [productDetail, setProductDetail] = useState();
 
-    // Getting Product name.
+    // Getting Product name from URL.
     const { productName } = useParams();
 
+    // Whenever product data is updated, update the current product detail.
     useEffect(() => {
         if (data) {
             setProductDetail(...data.filter(item => item['name'] === productName));
         }
     }, [data, loading, error]);
-
 
     return (
         <div className="min-h-[80vh] flex items-center justify-center">

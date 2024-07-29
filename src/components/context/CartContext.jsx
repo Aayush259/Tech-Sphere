@@ -7,15 +7,9 @@ const CartContext = createContext();
 const CartContextProvider = ({ children }) => {
 
     // State for cart items.
-    const [cartItems, setCartItems] = useState([]);
-
-    // Get cart items from local storage if exists.
-    useEffect(() => {
-        const storedCartItems = localStorage.getItem('cartItems');
-        if (storedCartItems) {
-            setCartItems(JSON.parse(storedCartItems));
-        }
-    }, []);
+    const [cartItems, setCartItems] = useState(
+        localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
+    );
 
     // Update local storage when cart items updated.
     useEffect(() => {
@@ -53,7 +47,7 @@ const CartContextProvider = ({ children }) => {
     };
 
     // Function to add item to cart.
-    const addItemsToCart = (item) => {
+    const addItemToCart = (item) => {
         setCartItems(prevCartItems => {
 
             const itemIndex = prevCartItems.findIndex(cartItem => cartItem['name'] === item['name']);
@@ -81,7 +75,7 @@ const CartContextProvider = ({ children }) => {
     };
 
     return (
-        <CartContext.Provider value={{ cartItems, addItemsToCart, removeItemFromCart, incrementItemCount, decrementItemCount, isItemInCart }}>
+        <CartContext.Provider value={{ cartItems, addItemToCart, removeItemFromCart, incrementItemCount, decrementItemCount, isItemInCart }}>
             {children}
         </CartContext.Provider>
     );
@@ -90,4 +84,4 @@ const CartContextProvider = ({ children }) => {
 // Custom hook to use cart data in any component.
 const useCartData = () => useContext(CartContext);
 
-export { useCartData, CartContextProvider }
+export { useCartData, CartContextProvider };

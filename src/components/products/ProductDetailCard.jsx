@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useCartData } from '../context/CartContext.jsx';
 
 export default function ProductDetailCard({ productDetail }) {
+
+    // Getting functions to manage cart.
+    const { addItemToCart, removeItemFromCart, isItemInCart } = useCartData();
 
     // Extracting product details.
     const productName = productDetail['name'];
     const productDesc = productDetail['description'];
     const productPrice = productDetail['price'] || 10000;
     const productImg = productDetail['image'];
+
+    // State to check whether item is present in cart or not.
+    const [isAddedInCart, setIsAddedInCart] = useState(isItemInCart(productName));
+
+    // Function to handle cart action to add and remove product from cart.
+    const handleCartBtnClick = () => {
+        if (isItemInCart(productName)) {
+            removeItemFromCart(productName);
+        } else {
+            addItemToCart(productDetail);
+        };
+        setIsAddedInCart(prevState => !prevState);
+    };
 
     return (
         <div
@@ -47,8 +64,11 @@ export default function ProductDetailCard({ productDetail }) {
 
                     <button
                         className="flex-grow bg-indigo-900 text-white hover:bg-white hover:text-indigo-900 py-3 px-1 border-2 rounded-3xl duration-200 border-indigo-900 uppercase"
+                        onClick={handleCartBtnClick}
                     >
-                        Add to Cart
+                        {
+                            isAddedInCart ? 'Remove from cart' : 'Add to cart'
+                        }
                     </button>
 
                     <button

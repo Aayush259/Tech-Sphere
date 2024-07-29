@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Nav from './components/navbar/Nav.jsx';
 import useFetch from './hooks/useFetch.js';
 import { ProductDataProvider } from './components/context/ProductDataContext.jsx';
+import { CartContextProvider } from './components/context/CartContext.jsx';
 
 export default function App() {
 
@@ -17,7 +18,9 @@ export default function App() {
     <>
       <Nav />
       <ProductDataProvider values={{ data, loading, error }}>
-        <Outlet />
+        <CartContextProvider>
+          <Outlet />
+        </CartContextProvider>
       </ProductDataProvider>
     </>
   );
