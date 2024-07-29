@@ -9,15 +9,15 @@ export default function Nav() {
     const navigationLinks = [
         {
             linkText: 'Products',
-            linkTo: '/Tech-Sphere/products',
+            linkTo: 'products',
         },
         {
             linkText: 'Wishlist',
-            linkTo: '/Tech-Sphere/wishlist',
+            linkTo: 'wishlist',
         },
         {
             linkText: 'Cart',
-            linkTo: '/Tech-Sphere/cart',
+            linkTo: 'cart',
         },
     ];
 
