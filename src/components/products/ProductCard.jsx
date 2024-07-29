@@ -52,6 +52,7 @@ export default function ProductCard({ productDetails }) {
                 </button>
 
                 <Link
+                to={`${productName}`}
                 className="bg-indigo-900 p-2 my-3 block text-center text-white font-semibold rounded-3xl hover:bg-white hover:text-indigo-900 border-2 border-indigo-900 duration-200"
                 >
                     View Details

@@ -8,6 +8,7 @@ import './index.css';
 import App from './App.jsx';
 import Home from './components/home/Home.jsx';
 import Products from './components/products/Products.jsx';
+import ProductDetail from './components/products/ProductDetail.jsx';
 
 library.add(fas, fab);
 
@@ -16,6 +17,7 @@ const router = createBrowserRouter(
     <Route path='/Tech-Sphere/' element={<App />}>
       <Route index element={<Home />} />
       <Route path='products' element={<Products />} />
+      <Route path='products/:productName' element={<ProductDetail />} />
     </Route>
   )
 );
