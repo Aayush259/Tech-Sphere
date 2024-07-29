@@ -9,6 +9,7 @@ import App from './App.jsx';
 import Home from './components/home/Home.jsx';
 import Products from './components/products/Products.jsx';
 import ProductDetail from './components/products/ProductDetail.jsx';
+import Cart from './components/cart/Cart.jsx';
 
 library.add(fas, fab);
 
@@ -18,6 +19,7 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path='products' element={<Products />} />
       <Route path='products/:productName' element={<ProductDetail />} />
+      <Route path='cart' element={<Cart />} />
     </Route>
   )
 );
