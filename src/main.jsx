@@ -1,9 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import './index.css';
 import App from './App.jsx';
 import Home from './components/home/Home.jsx';
+
+library.add(fas, fab);
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -11,7 +16,7 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
     </Route>
   )
-)
+);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
