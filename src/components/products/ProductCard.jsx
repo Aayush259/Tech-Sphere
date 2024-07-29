@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
-import { useCartData } from '../context/CartContext.jsx';
+import { useCartData } from '../../context/CartContext.jsx';
 
 export default function ProductCard({ productDetails }) {
 

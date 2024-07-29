@@ -1,6 +1,6 @@
 import React from 'react';
 import ProductCard from '../products/ProductCard.jsx';
-import { useProductData } from '../context/ProductDataContext.jsx';
+import { useProductData } from '../../context/ProductDataContext.jsx';
 
 export default function HomeProducts() {
 

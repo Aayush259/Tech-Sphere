@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import Nav from './components/navbar/Nav.jsx';
 import useFetch from './hooks/useFetch.js';
-import { ProductDataProvider } from './components/context/ProductDataContext.jsx';
-import { CartContextProvider } from './components/context/CartContext.jsx';
+import { ProductDataProvider } from './context/ProductDataContext.jsx';
+import { CartContextProvider } from './context/CartContext.jsx';
 
 export default function App() {
 

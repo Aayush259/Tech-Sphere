@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useCartData } from '../context/CartContext.jsx';
+import { useCartData } from '../../context/CartContext';
 
 export default function ProductDetailCard({ productDetail }) {
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useProductData } from '../context/ProductDataContext';
+import { useProductData } from '../../context/ProductDataContext.jsx';
 import ProductCard from './ProductCard.jsx';
 
 export default function Products() {

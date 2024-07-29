@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useProductData } from '../context/ProductDataContext.jsx';
+import { useProductData } from '../../context/ProductDataContext.jsx';
 import ProductDetailCard from './ProductDetailCard.jsx';
 
 export default function ProductDetail() {
