@@ -1,24 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import PropTypes from 'prop-types';
 
-export default function ProductCard() {
+export default function ProductCard({ productDetails }) {
 
-    const product = {
-        "_id": "66a14841d291bb42dec80c4f",
-        "name": "Noise Pulse 4 Max Smart Watch",
-        "description": "AI Create (India'a 1st Ever with Unlimited Watch Faces), AI Search, 1.96\" AMOLED Display, Functional Crown, Premium Metallic Finish, Health Suite (Jet Black)",
-        "price": 2499,
-        "image": "https://res.cloudinary.com/surbhisinghal/image/upload/v1721845496/61Iw0g8zYYL._SX679__fwfghz.jpg",
-        "__v": 0
-    }
-
-    const productName = product.name;
-    const productPrice = product.price;
-    const productImage = product.image;
+    // Getting product name, price and image.
+    const productName = productDetails['name'];
+    const productPrice = productDetails['price'] || 10000;
+    const productImage = productDetails['image'];
 
     return (
-        <div className="relative w-64 max-w-[80vw] p-4 rounded-2xl shadow-product-card-shadow overflow-hidden duration-300">
+        <div className="relative w-64 max-w-[80vw] p-4 pt-10 rounded-2xl shadow-product-card-shadow overflow-hidden duration-300">
 
             <button className="absolute top-3 right-3 hover:opacity-70">
                 <FontAwesomeIcon
@@ -40,7 +33,7 @@ export default function ProductCard() {
                     className="px-3"
                 >
                     <p
-                        className="font-bold text-xl text-indigo-900"
+                        className="font-bold text-xl text-indigo-900 text-ellipsis overflow-hidden text-nowrap whitespace-nowrap"
                     >
                         {productName}
                     </p>
@@ -68,3 +61,10 @@ export default function ProductCard() {
     );
 };
 
+ProductCard.propTypes = {
+    productDetails: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        price: PropTypes.number,
+        image: PropTypes.string.isRequired
+    }).isRequired,
+};
