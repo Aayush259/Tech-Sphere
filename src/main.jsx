@@ -7,6 +7,7 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import './index.css';
 import App from './App.jsx';
 import Home from './components/home/Home.jsx';
+import Products from './components/products/Products.jsx';
 
 library.add(fas, fab);
 
@@ -14,6 +15,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/Tech-Sphere/' element={<App />}>
       <Route index element={<Home />} />
+      <Route path='products' element={<Products />} />
     </Route>
   )
 );
