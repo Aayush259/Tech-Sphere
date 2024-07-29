@@ -54,7 +54,7 @@ export default function ProductDetailCard({ productDetail }) {
                     <p>
                         <span>Price: </span>
                         &#8377;
-                        {productPrice}
+                        {productPrice.toLocaleString()}
                     </p>
                     <p className="text-lg font-normal text-indigo-900 my-3">
                         {productDesc}

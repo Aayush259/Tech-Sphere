@@ -33,7 +33,7 @@ export default function CartItem({ productDetails }) {
                 </p>
 
                 <p className="font-semibold text-green-500">
-                    &#8377; {productPrice * productCount}
+                    &#8377; {(productPrice * productCount).toLocaleString()}
                 </p>
 
                 <div
@@ -66,14 +66,14 @@ export default function CartItem({ productDetails }) {
                     className="my-1 flex flex-row flex-wrap items-center justify-center gap-2"
                 >
                     <button
-                        className="flex-grow py-1 px-1 border border-indigo-900 uppercase duration-200 bg-indigo-900 hover:bg-white text-white hover:text-indigo-900 rounded-xl min-w-fit"
+                        className="flex-grow py-1 px-2 border border-indigo-900 uppercase duration-200 bg-indigo-900 hover:bg-white text-white hover:text-indigo-900 rounded-xl min-w-fit"
                         onClick={() => removeItemFromCart(productId)}
                     >
                         Remove from cart
                     </button>
 
                     <button
-                        className="flex-grow py-1 px-1 border border-indigo-900 uppercase duration-200 bg-white hover:bg-indigo-900 text-indigo-900 hover:text-white rounded-xl min-w-fit"
+                        className="flex-grow py-1 px-2 border border-indigo-900 uppercase duration-200 bg-white hover:bg-indigo-900 text-indigo-900 hover:text-white rounded-xl min-w-fit"
                     >
                         Add to wishlist
                     </button>

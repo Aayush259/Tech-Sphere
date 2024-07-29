@@ -12,7 +12,7 @@ export default function ProductCard({ productDetails }) {
     // Extracting product details.
     const productId = productDetails['_id'];
     const productName = productDetails['name'];
-    const productPrice = productDetails['price'] || 10000;
+    const productPrice = productDetails['price'] || 9999;
     const productImage = productDetails['image'];
 
     // State to check whether item is present in cart or not.
@@ -59,7 +59,7 @@ export default function ProductCard({ productDetails }) {
                     <p
                         className="my-2 text-lg font-bold text-indigo-900"
                     >
-                        &#8377; {productPrice}
+                        &#8377; {productPrice.toLocaleString()}
                     </p>
                 </div>
 
