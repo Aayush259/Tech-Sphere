@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import { useCartData } from '../../context/CartContext.jsx';
@@ -7,7 +7,10 @@ import { useCartData } from '../../context/CartContext.jsx';
 export default function ProductCard({ productDetails }) {
 
     // Getting functions to manage cart.
-    const { addItemToCart, removeItemFromCart, isItemInCart } = useCartData();
+    const { addItemToCart, isItemInCart } = useCartData();
+
+    // Navigate function.
+    const navigate = useNavigate();
 
     // Extracting product details.
     const productId = productDetails['_id'];
@@ -21,7 +24,7 @@ export default function ProductCard({ productDetails }) {
     // Function to handle cart action to add and remove product from cart.
     const handleCartAction = () => {
         if (isItemInCart(productId)) {
-            removeItemFromCart(productId);
+            navigate('/Tech-Sphere/cart')
         } else {
             addItemToCart(productDetails);
         };
@@ -68,7 +71,7 @@ export default function ProductCard({ productDetails }) {
                     onClick={handleCartAction}
                 >
                     {
-                        isAddedInCart ? 'Remove From Cart' : 'Add To Cart'
+                        isAddedInCart ? 'Go to Cart' : 'Add To Cart'
                     }
                 </button>
 

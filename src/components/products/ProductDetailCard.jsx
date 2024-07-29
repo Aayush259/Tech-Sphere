@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useCartData } from '../../context/CartContext';
+import { useCartData } from '../../context/CartContext.jsx';
 
 export default function ProductDetailCard({ productDetail }) {
 
     // Getting functions to manage cart.
-    const { addItemToCart, removeItemFromCart, isItemInCart } = useCartData();
+    const { addItemToCart, isItemInCart } = useCartData();
+
+    // Navigate function.
+    const navigate = useNavigate();
 
     // Extracting product details.
     const productId = productDetail['_id'];
@@ -20,7 +24,7 @@ export default function ProductDetailCard({ productDetail }) {
     // Function to handle cart action to add and remove product from cart.
     const handleCartBtnClick = () => {
         if (isItemInCart(productId)) {
-            removeItemFromCart(productId);
+            navigate('/Tech-Sphere/cart');
         } else {
             addItemToCart(productDetail);
         };
@@ -64,11 +68,11 @@ export default function ProductDetailCard({ productDetail }) {
                 <div className="flex flex-row flex-wrap w-full items-center justify-center gap-4 text-lg mt-5 pb-4 border-b border-indigo-900">
 
                     <button
-                        className="flex-grow bg-indigo-900 text-white hover:bg-white hover:text-indigo-900 py-3 px-1 border-2 rounded-3xl duration-200 border-indigo-900 uppercase"
+                        className="flex-grow bg-indigo-900 text-white hover:bg-white hover:text-indigo-900 py-3 px-2 border-2 rounded-3xl duration-200 border-indigo-900 uppercase"
                         onClick={handleCartBtnClick}
                     >
                         {
-                            isAddedInCart ? 'Remove from cart' : 'Add to cart'
+                            isAddedInCart ? 'View in cart' : 'Add to cart'
                         }
                     </button>
 
