@@ -19,7 +19,7 @@ export default function Products() {
                         <div>{error.message}</div>
                     ) : (
                         data && data.map(item => (
-                            <ProductCard key={item['_id']} productDetails={item} />
+                            <ProductCard key={item['id']} productDetails={item} />
                         ))
                     )
                 }

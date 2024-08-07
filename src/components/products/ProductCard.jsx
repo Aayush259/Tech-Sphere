@@ -15,7 +15,7 @@ export default function ProductCard({ productDetails }) {
     // Extracting product details.
     const productId = productDetails['_id'];
     const productName = productDetails['name'];
-    const productPrice = productDetails['price'] || 9999;
+    const productPrice = parseInt(productDetails['price'].replace(/[₹,]/g, ''));
     const productImage = productDetails['image'];
 
     // State to check whether item is present in cart or not.
@@ -89,7 +89,7 @@ export default function ProductCard({ productDetails }) {
 ProductCard.propTypes = {
     productDetails: PropTypes.shape({
         name: PropTypes.string.isRequired,
-        price: PropTypes.number,
+        price: PropTypes.string.isRequired,
         image: PropTypes.string.isRequired
     }).isRequired,
 };

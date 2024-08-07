@@ -25,7 +25,7 @@ export default function HomeProducts() {
                         <div>{error.message}</div>
                     ) : (
                         data && data.slice(3, 6).map(item => (
-                            <ProductCard key={item['_id']} productDetails={item} />
+                            <ProductCard key={item['id']} productDetails={item} />
                         ))
                     )
                 }

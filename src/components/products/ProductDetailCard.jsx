@@ -15,7 +15,7 @@ export default function ProductDetailCard({ productDetail }) {
     const productId = productDetail['_id'];
     const productName = productDetail['name'];
     const productDesc = productDetail['description'];
-    const productPrice = productDetail['price'] || 10000;
+    const productPrice = parseInt(productDetail['price'].replace(/[₹,]/g, ''));
     const productImg = productDetail['image'];
 
     // State to check whether item is present in cart or not.
@@ -91,7 +91,7 @@ ProductDetailCard.propTypes = {
     productDetail: PropTypes.shape({
         name: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
-        price: PropTypes.number,
+        price: PropTypes.string.isRequired,
         image: PropTypes.string.isRequired,
     }).isRequired,
 }
