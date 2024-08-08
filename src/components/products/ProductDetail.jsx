@@ -1,39 +1,47 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useProductData } from '../../context/ProductDataContext.jsx';
+import { useProducts } from '../../hooks/useStoreItems.js';
+import StatusCode from '../../app/utlis/StatusCode.js';
 import ProductDetailCard from './ProductDetailCard.jsx';
 
 export default function ProductDetail() {
 
-    // Getting product data from context.
-    const { data, loading, error } = useProductData();
+    // Getting products from store.
+    const { products, status } = useProducts();
 
     // State for the product whose detail has to be shown.
-    const [productDetail, setProductDetail] = useState();
+    const [productDetail, setProductDetail] = useState(null);
 
     // Getting Product name from URL.
-    const { productName } = useParams();
+    const { productId } = useParams();
 
-    // Whenever product data is updated, update the current product detail.
+    // Function to get product detail and update it to state.
+    const addProductDetail = useCallback(() => {
+        // Getting index of required product from products state.
+        const requiredProductIndex = products.findIndex(product => product.id === productId);
+
+        // If product is not found, then return.
+        if (requiredProductIndex === -1) return;
+
+        // Update product detail.
+        setProductDetail(products[requiredProductIndex]);
+
+    }, [products, productId, setProductDetail]);
+
     useEffect(() => {
-        if (data) {
-            setProductDetail(...data.filter(item => item['name'] === productName));
-        }
-    }, [data, loading, error]);
+        addProductDetail();
+    }, [products, status, addProductDetail]);
 
-    return (
-        <div className="min-h-[80vh] flex items-center justify-center">
-            {
-                loading ? (
-                    <div>Loading...</div>
-                ) : error && !data ? (
-                    <div>{error.message}</div>
-                ) : data && productDetail ? (
-                    <ProductDetailCard productDetail={productDetail} />
-                ) : (
-                    <div>Item Not Found</div>
-                )
-            }
-        </div >
-    );
+    switch (status) {
+        case StatusCode.ERROR:
+            return <div>Error...</div>;
+        default:
+            return (
+                <div className="min-h-[80vh] flex items-center justify-center">
+                    {
+                        productDetail ? <ProductDetailCard productDetail={productDetail} /> : <div>Loading...</div>
+                    }
+                </div>
+            );
+    };
 };

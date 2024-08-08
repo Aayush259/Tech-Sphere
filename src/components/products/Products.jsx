@@ -1,29 +1,31 @@
 import React from 'react';
-import { useProductData } from '../../context/ProductDataContext.jsx';
+import { useProducts } from '../../hooks/useStoreItems.js';
 import ProductCard from './ProductCard.jsx';
+import StatusCode from '../../app/utlis/StatusCode.js';
 
 export default function Products() {
 
-    // Getting product data from context.
-    const { data, loading, error } = useProductData();
+    // Getting products from store.
+    const { products, status } = useProducts();
 
-    return (
-        <>
-            <div
-                className="flex flex-row flex-wrap items-stretch justify-center gap-10 my-10 lg:gap-20"
-            >
-                {
-                    loading ? (
-                        <div>Loading...</div>
-                    ) : error && !data ? (
-                        <div>{error.message}</div>
-                    ) : (
-                        data && data.map(item => (
-                            <ProductCard key={item['id']} productDetails={item} />
+    switch (status) {
+        case StatusCode.LOADING:
+            return <div>Loading...</div>;
+
+        case StatusCode.ERROR:
+            return <div>Error...</div>;
+
+        default:
+            return (
+                <div
+                    className="flex flex-row flex-wrap items-stretch justify-center gap-10 my-10 lg:gap-20"
+                >
+                    {
+                        products.map(product => (
+                            <ProductCard key={product['id']} productDetails={product} />
                         ))
-                    )
-                }
-            </div>
-        </>
-    );
+                    }
+                </div>
+            );
+    };
 };

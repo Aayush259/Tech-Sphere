@@ -16,9 +16,10 @@ export default function ProductCard({ productDetails }) {
     const [isAddedInCart, setIsAddedInCart] = useState(isItemInCart);
 
     // Extracting product details.
-    const productName = product.name;
-    const productPrice = product.price;
-    const productImage = product.image;
+    const productId = product['id'];
+    const productName = product['name'];
+    const productPrice = product['price'];
+    const productImage = product['image'];
 
     // Function to handle cart action to add and remove product from cart.
     const handleCartAction = () => {
@@ -75,7 +76,7 @@ export default function ProductCard({ productDetails }) {
                 </button>
 
                 <Link
-                    to={`/Tech-Sphere/products/${productName}`}
+                    to={`/Tech-Sphere/products/${productId}`}
                     className="bg-indigo-900 p-2 my-3 block text-center text-white font-semibold rounded-3xl hover:bg-white hover:text-indigo-900 border-2 border-indigo-900 duration-200"
                 >
                     View Details
@@ -88,7 +89,7 @@ export default function ProductCard({ productDetails }) {
 ProductCard.propTypes = {
     productDetails: PropTypes.shape({
         name: PropTypes.string.isRequired,
-        price: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
         image: PropTypes.string.isRequired
     }).isRequired,
 };

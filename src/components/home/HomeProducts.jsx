@@ -1,35 +1,25 @@
 import React from 'react';
+import { useProducts } from '../../hooks/useStoreItems.js';
+import StatusCode from '../../app/utlis/StatusCode.js';
 import ProductCard from '../products/ProductCard.jsx';
-import { useProductData } from '../../context/ProductDataContext.jsx';
 
 export default function HomeProducts() {
 
-    // Getting product data from context.
-    const { data, loading, error } = useProductData();
+    // Getting products from store.
+    const { products, status } = useProducts();
 
-    return (
-        <>
-            <h2
-                className="uppercase text-2xl md:text-3xl font-bold text-center my-10"
-            >
-                Products
-            </h2>
+    switch (status) {
+        case StatusCode.LOADING:
+            return <div>Loading...</div>;
 
-            <div
-                className="flex flex-row flex-wrap items-stretch justify-center gap-10 my-10 lg:gap-20"
-            >
-                {
-                    loading ? (
-                        <div>Loading...</div>
-                    ) : error && !data ? (
-                        <div>{error.message}</div>
-                    ) : (
-                        data && data.slice(3, 6).map(item => (
-                            <ProductCard key={item['id']} productDetails={item} />
-                        ))
-                    )
-                }
-            </div>
-        </>
-    );
+        case StatusCode.ERROR:
+            return <div>Error...</div>;
+
+        default:
+            return (
+                products.slice(3, 6).map(product => (
+                    <ProductCard key={product.id} productDetails={product} />
+                ))
+            );
+    };
 };

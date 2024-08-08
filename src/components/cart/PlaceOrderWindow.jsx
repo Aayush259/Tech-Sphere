@@ -11,7 +11,7 @@ export default function PlaceOrderWindow({ cartItems }) {
         let price = 0;
 
         cartItems.forEach(item => {
-            price += (item['price'] || 9999) * item['count'];
+            price += item['price'] * item['count'];
         });
 
         setTotalPrice(price);

@@ -1,18 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import useCart from '../../hooks/useCart';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useCartData } from '../../context/CartContext.jsx';
 
 export default function CartItem({ productDetails }) {
 
-    // Getting product count increment and decrement functions from context.
-    const { incrementItemCount, decrementItemCount, removeItemFromCart } = useCartData();
+    // Getting functions and products from cart.
+    const { product, incrementItemCount, decrementItemCount, removeItemFromCart } = useCart(productDetails);
 
     // Extracting product details.
-    const productId = productDetails['_id'];
-    const productName = productDetails['name'];
-    const productPrice = productDetails['price'] || 9999;
-    const productImg = productDetails['image'];
+    const productName = product.name;
+    const productPrice = product.price;
+    const productImg = product.image;
     const productCount = productDetails['count'];
 
     return (
@@ -41,7 +40,7 @@ export default function CartItem({ productDetails }) {
                 >
                     <button
                         className="hover:opacity-75 duration-200"
-                        onClick={() => decrementItemCount(productId)}
+                        onClick={decrementItemCount}
                     >
                         <FontAwesomeIcon
                             icon="fa-solid fa-minus"
@@ -53,7 +52,7 @@ export default function CartItem({ productDetails }) {
 
                     <button
                         className="hover:opacity-75 duration-200"
-                        onClick={() => incrementItemCount(productId)}
+                        onClick={incrementItemCount}
                     >
                         <FontAwesomeIcon
                             icon="fa-solid fa-plus"
@@ -67,7 +66,7 @@ export default function CartItem({ productDetails }) {
                 >
                     <button
                         className="flex-grow py-1 px-2 border border-indigo-900 uppercase duration-200 bg-indigo-900 hover:bg-white text-white hover:text-indigo-900 rounded-xl min-w-fit"
-                        onClick={() => removeItemFromCart(productId)}
+                        onClick={removeItemFromCart}
                     >
                         Remove from cart
                     </button>
@@ -85,9 +84,8 @@ export default function CartItem({ productDetails }) {
 
 CartItem.propTypes = {
     productDetails: PropTypes.shape({
-        _id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
-        price: PropTypes.number,
+        price: PropTypes.number.isRequired,
         image: PropTypes.string.isRequired,
         count: PropTypes.number.isRequired,
     }).isRequired,
