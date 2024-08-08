@@ -1,12 +1,12 @@
 
 // Reducer function to add item in cart.
-const addItem = (state, action) => {
+const add = (state, action) => {
     // Getting item index, to check whether the item is already in the cart or not.
     const itemIndex = state.value.findIndex(item => item.id === action.payload.id);
 
     // If the item is already in cart, update its count, otherwise add the item in cart.
     if (itemIndex === -1) {
-        state.value = [...state.value, {...action.payload, count: 1}];
+        state.value = [...state.value, { ...action.payload, count: 1 }];
     } else {
         const updatedItems = [...state.value];
         updatedItems[itemIndex]['count'] += 1;
@@ -15,14 +15,14 @@ const addItem = (state, action) => {
 };
 
 // Reducer function to remove item from cart.
-const removeItem = (state, action) => {
+const remove = (state, action) => {
     const prevItems = [...state.value];
 
     state.value = prevItems.filter(item => item.id !== action.payload);
 };
 
 // Reducer function to increment item count in cart.
-const incrementCount = (state, action) => {
+const increment = (state, action) => {
     // Getting item index.
     const itemIndex = state.value.findIndex(item => item.id === action.payload);
 
@@ -35,7 +35,7 @@ const incrementCount = (state, action) => {
 };
 
 // Reducer function to decrement item count in cart.
-const decrementCount = (state, action) => {
+const decrement = (state, action) => {
     // Getting item index.
     const itemIndex = state.value.findIndex(item => item.id === action.payload);
     const updatedItems = [...state.value];
@@ -47,3 +47,5 @@ const decrementCount = (state, action) => {
         state.value = updatedItems;
     };
 };
+
+export { add, remove, increment, decrement };
