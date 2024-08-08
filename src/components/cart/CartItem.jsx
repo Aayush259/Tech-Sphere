@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import useCart from '../../hooks/useCart';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import useExtract from '../../hooks/useExtract';
+import useCart from '../../hooks/useCart.js';
+import useExtract from '../../hooks/useExtract.js';
+import useWishlist from '../../hooks/useWishlist.js';
 
 export default function CartItem({ productDetails }) {
 
-    // Getting functions and products from cart.
+    // Getting functions to manage cart.
     const { incrementItemCount, decrementItemCount, removeItemFromCart } = useCart(productDetails);
+
+    // Getting functions to manage wishlist.
+    const { addItemInWishlist, removeItemFromWishlist, isItemInWishlist } = useWishlist(productDetails);
 
     // Extracting product details.
     const {
@@ -16,7 +20,17 @@ export default function CartItem({ productDetails }) {
         image: productImg
     } = useExtract(productDetails);
 
+    // Product count in cart.
     const productCount = productDetails['count'];
+
+    // Function to handle wishlist actions.
+    const handleWishlistAction = () => {
+        if (isItemInWishlist) {
+            removeItemFromWishlist();
+        } else {
+            addItemInWishlist();
+        }
+    };
 
     return (
         <div
@@ -77,8 +91,11 @@ export default function CartItem({ productDetails }) {
 
                     <button
                         className="flex-grow py-1 px-2 border border-indigo-900 uppercase duration-200 bg-white hover:bg-indigo-900 text-indigo-900 hover:text-white rounded-xl min-w-fit"
+                        onClick={handleWishlistAction}
                     >
-                        Add to wishlist
+                        {
+                            isItemInWishlist ? 'Remove from wishlist' : 'Add to wishlist'
+                        }
                     </button>
                 </div>
             </div>

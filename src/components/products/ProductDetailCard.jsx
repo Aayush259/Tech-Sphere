@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import useCart from '../../hooks/useCart.js';
 import useExtract from '../../hooks/useExtract.js';
+import useWishlist from '../../hooks/useWishlist.js';
 
 export default function ProductDetailCard({ productDetail }) {
 
     // Getting functions to manage cart.
     const { addItemInCart, isItemInCart } = useCart(productDetail);
+
+    // Getting functions to manage wishlist.
+    const { addItemInWishlist, removeItemFromWishlist, isItemInWishlist } = useWishlist(productDetail);
 
     // Navigate function.
     const navigate = useNavigate();
@@ -20,17 +24,22 @@ export default function ProductDetailCard({ productDetail }) {
         image: productImg
     } = useExtract(productDetail);
 
-    // State to check whether item is present in cart or not.
-    const [isAddedInCart, setIsAddedInCart] = useState(isItemInCart);
-
-    // Function to handle cart action to add and remove product from cart.
+    // Function to handle cart actions to add and remove product from cart.
     const handleCartBtnClick = () => {
-        if (isAddedInCart) {
+        if (isItemInCart) {
             navigate('/Tech-Sphere/cart');
         } else {
             addItemInCart();
         };
-        setIsAddedInCart(prevState => !prevState);
+    };
+
+    // Function to handle wishlist actions to add and remove product from wishlist.
+    const handleWishlistAction = () => {
+        if (isItemInWishlist) {
+            removeItemFromWishlist();
+        } else {
+            addItemInWishlist();
+        };
     };
 
     return (
@@ -74,14 +83,17 @@ export default function ProductDetailCard({ productDetail }) {
                         onClick={handleCartBtnClick}
                     >
                         {
-                            isAddedInCart ? 'View in cart' : 'Add to cart'
+                            isItemInCart ? 'View in cart' : 'Add to cart'
                         }
                     </button>
 
                     <button
                         className="flex-grow bg-white text-indigo-900 hover:bg-indigo-900 hover:text-white duration-200 py-3 px-1 border-2 rounded-3xl border-indigo-900 uppercase"
+                        onClick={handleWishlistAction}
                     >
-                        Add to Wishlist
+                        {
+                            isItemInWishlist ? 'Remove from wishlist' : 'Add to wishlist'
+                        }
                     </button>
                 </div>
             </div>

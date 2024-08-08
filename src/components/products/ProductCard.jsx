@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import useCart from '../../hooks/useCart.js';
 import useExtract from '../../hooks/useExtract.js';
+import useWishlist from '../../hooks/useWishlist.js';
 
 export default function ProductCard({ productDetails }) {
 
     // Getting functions to manage cart.
     const { addItemInCart, isItemInCart } = useCart(productDetails);
+
+    // Getting functions to manage wishlist.
+    const { addItemInWishlist, removeItemFromWishlist, isItemInWishlist } = useWishlist(productDetails);
 
     // Navigate function.
     const navigate = useNavigate();
@@ -21,7 +25,7 @@ export default function ProductCard({ productDetails }) {
         image: productImage,
     } = useExtract(productDetails);
 
-    // Function to handle cart action to add and remove product from cart.
+    // Function to handle cart actions to add and remove product from cart.
     const handleCartAction = () => {
         if (isItemInCart) {
             navigate('/Tech-Sphere/cart')
@@ -30,13 +34,25 @@ export default function ProductCard({ productDetails }) {
         };
     };
 
+    // Function to handle wishlist actions to add and remove product from cart.
+    const handleWishlistAction = () => {
+        if (isItemInWishlist) {
+            removeItemFromWishlist();
+        } else {
+            addItemInWishlist();
+        };
+    };
+
     return (
         <div className="relative w-64 max-w-[80vw] p-4 pt-10 rounded-2xl shadow-product-card-shadow overflow-hidden duration-300">
 
-            <button className="absolute top-3 right-3 hover:opacity-70">
+            <button
+                className="absolute top-3 right-3 hover:opacity-70"
+                onClick={handleWishlistAction}
+            >
                 <FontAwesomeIcon
                     icon="fa-solid fa-heart"
-                    className={`text-slate-400 h-6`}
+                    className={`${isItemInWishlist ? "text-red-500" : "text-slate-400"} h-6`}
                 />
             </button>
 

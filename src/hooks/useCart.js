@@ -5,7 +5,7 @@ import useExtract from './useExtract.js';
 
 const useCart = (item) => {
 
-    // Getting all cart items from state.
+    // Getting all cart items from store.
     const cartItems = useSelector(state => state.cart.value);
     const dispatch = useDispatch();
 
