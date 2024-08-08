@@ -13,9 +13,6 @@ export default function ProductCard({ productDetails }) {
     // Navigate function.
     const navigate = useNavigate();
 
-    // State to track whether the item is added in cart or not.
-    const [isAddedInCart, setIsAddedInCart] = useState(isItemInCart);
-
     // Extracting product details.
     const {
         id: productId,
@@ -26,12 +23,11 @@ export default function ProductCard({ productDetails }) {
 
     // Function to handle cart action to add and remove product from cart.
     const handleCartAction = () => {
-        if (isAddedInCart) {
+        if (isItemInCart) {
             navigate('/Tech-Sphere/cart')
         } else {
             addItemInCart();
         };
-        setIsAddedInCart(prevState => !prevState);
     };
 
     return (
@@ -74,7 +70,7 @@ export default function ProductCard({ productDetails }) {
                     onClick={handleCartAction}
                 >
                     {
-                        isAddedInCart ? 'Go to Cart' : 'Add To Cart'
+                        isItemInCart ? 'Go to Cart' : 'Add To Cart'
                     }
                 </button>
 
