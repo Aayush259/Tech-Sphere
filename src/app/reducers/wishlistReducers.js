@@ -14,7 +14,7 @@ const add = (state, action) => {
 const remove = (state, action) => {
     const prevItems = [...state.value];
 
-    state.value = prevItems.filter(item => item.id === action.payload);
+    state.value = prevItems.filter(item => item.id !== action.payload);
 };
 
 export { add, remove };
