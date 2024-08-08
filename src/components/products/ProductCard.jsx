@@ -2,31 +2,30 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
-import { useCartData } from '../../context/CartContext.jsx';
+import useCart from '../../hooks/useCart.js';
 
 export default function ProductCard({ productDetails }) {
 
     // Getting functions to manage cart.
-    const { addItemToCart, isItemInCart } = useCartData();
+    const { product, addItemInCart, isItemInCart } = useCart(productDetails);
 
     // Navigate function.
     const navigate = useNavigate();
 
-    // Extracting product details.
-    const productId = productDetails['_id'];
-    const productName = productDetails['name'];
-    const productPrice = parseInt(productDetails['price'].replace(/[₹,]/g, ''));
-    const productImage = productDetails['image'];
+    // State to track whether the item is added in cart or not.
+    const [isAddedInCart, setIsAddedInCart] = useState(isItemInCart);
 
-    // State to check whether item is present in cart or not.
-    const [isAddedInCart, setIsAddedInCart] = useState(isItemInCart(productId));
+    // Extracting product details.
+    const productName = product.name;
+    const productPrice = product.price;
+    const productImage = product.image;
 
     // Function to handle cart action to add and remove product from cart.
     const handleCartAction = () => {
-        if (isItemInCart(productId)) {
+        if (isAddedInCart) {
             navigate('/Tech-Sphere/cart')
         } else {
-            addItemToCart(productDetails);
+            addItemInCart();
         };
         setIsAddedInCart(prevState => !prevState);
     };
