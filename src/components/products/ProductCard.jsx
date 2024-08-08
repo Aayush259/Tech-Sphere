@@ -3,11 +3,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import useCart from '../../hooks/useCart.js';
+import useExtract from '../../hooks/useExtract.js';
 
 export default function ProductCard({ productDetails }) {
 
     // Getting functions to manage cart.
-    const { product, addItemInCart, isItemInCart } = useCart(productDetails);
+    const { addItemInCart, isItemInCart } = useCart(productDetails);
 
     // Navigate function.
     const navigate = useNavigate();
@@ -16,10 +17,12 @@ export default function ProductCard({ productDetails }) {
     const [isAddedInCart, setIsAddedInCart] = useState(isItemInCart);
 
     // Extracting product details.
-    const productId = product['id'];
-    const productName = product['name'];
-    const productPrice = product['price'];
-    const productImage = product['image'];
+    const {
+        id: productId,
+        name: productName,
+        price: productPrice,
+        image: productImage,
+    } = useExtract(productDetails);
 
     // Function to handle cart action to add and remove product from cart.
     const handleCartAction = () => {

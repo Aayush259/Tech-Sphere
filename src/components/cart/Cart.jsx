@@ -14,7 +14,7 @@ export default function Cart() {
         >
             <div className="mb-40 lg:max-w-[60vw] lg:px-10">
                 {
-                    (cartItems && cartItems.length > 0) ? (
+                    (cartItems.length > 0) ? (
                         cartItems.map(item => <CartItem key={item['id']} productDetails={item} />)
                     ) : (
                         <div

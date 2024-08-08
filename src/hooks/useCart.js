@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, decrementCount, incrementCount, removeItem } from '../app/features/cartSlice.js';
+import useExtract from './useExtract.js';
 
 const useCart = (item) => {
 
@@ -8,17 +9,8 @@ const useCart = (item) => {
     const cartItems = useSelector(state => state.cart.value);
     const dispatch = useDispatch();
 
-    // Extracting item details.
-    const id = item['id'];
-    const name = item['name'];
-    const price = item['price'];
-    const image = item['image'];
-    const description = item['description'];
-
-    // Object of product details.
-    const product = {
-        id, name, price, image, description,
-    };
+    // Getting item id.
+    const { id } = useExtract(item);
 
     // Function to add item in cart.
     const addItemInCart = () => {
@@ -46,7 +38,6 @@ const useCart = (item) => {
     }, [cartItems, id]);
 
     return {
-        product,
         addItemInCart,
         removeItemFromCart,
         incrementItemCount,

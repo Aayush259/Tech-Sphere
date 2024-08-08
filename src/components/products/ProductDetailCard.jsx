@@ -2,20 +2,23 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import useCart from '../../hooks/useCart.js';
+import useExtract from '../../hooks/useExtract.js';
 
 export default function ProductDetailCard({ productDetail }) {
 
     // Getting functions to manage cart.
-    const {product, addItemInCart, isItemInCart} = useCart(productDetail);
+    const { addItemInCart, isItemInCart } = useCart(productDetail);
 
     // Navigate function.
     const navigate = useNavigate();
 
     // Extracting product details.
-    const productName = product['name'];
-    const productDesc = product['description'];
-    const productPrice = product['price'];
-    const productImg = product['image'];
+    const {
+        name: productName,
+        description: productDesc,
+        price: productPrice,
+        image: productImg
+    } = useExtract(productDetail);
 
     // State to check whether item is present in cart or not.
     const [isAddedInCart, setIsAddedInCart] = useState(isItemInCart);

@@ -2,16 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import useCart from '../../hooks/useCart';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import useExtract from '../../hooks/useExtract';
 
 export default function CartItem({ productDetails }) {
 
     // Getting functions and products from cart.
-    const { product, incrementItemCount, decrementItemCount, removeItemFromCart } = useCart(productDetails);
+    const { incrementItemCount, decrementItemCount, removeItemFromCart } = useCart(productDetails);
 
     // Extracting product details.
-    const productName = product.name;
-    const productPrice = product.price;
-    const productImg = product.image;
+    const {
+        name: productName,
+        price: productPrice,
+        image: productImg
+    } = useExtract(productDetails);
+
     const productCount = productDetails['count'];
 
     return (
