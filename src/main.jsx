@@ -10,6 +10,7 @@ import Home from './components/home/Home.jsx';
 import Products from './components/products/Products.jsx';
 import ProductDetail from './components/products/ProductDetail.jsx';
 import Cart from './components/cart/Cart.jsx';
+import Wishlist from './components/wishlist/Wishlist.jsx';
 import { Provider } from 'react-redux';
 import store from './app/store/store.js';
 
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
       <Route path='products' element={<Products />} />
       <Route path='products/:productId' element={<ProductDetail />} />
       <Route path='cart' element={<Cart />} />
+      <Route path='wishlist' element={<Wishlist />} />
     </Route>
   )
 );
