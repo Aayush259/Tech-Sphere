@@ -11,14 +11,14 @@ const useCart = (item) => {
     // Extracting item details.
     const id = item['id'];
     const name = item['name'];
-    const price = parseInt(item['price'].replace(/[₹,]/g, ''));
+    const price = item['price'];
     const image = item['image'];
     const description = item['description'];
 
     // Object of product details.
     const product = {
         id, name, price, image, description,
-    }
+    };
 
     // Function to add item in cart.
     const addItemInCart = () => {
