@@ -38,7 +38,7 @@ const increment = (state, action) => {
 const decrement = (state, action) => {
     // Getting item index.
     const itemIndex = state.value.findIndex(item => item.id === action.payload);
-    const updatedItems = [...state.value];
+    let updatedItems = [...state.value];
 
     // If item is present in cart, decrement its count and filter out those items whose count is zero.
     if (itemIndex !== -1) {
