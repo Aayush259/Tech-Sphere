@@ -8,4 +8,6 @@ const useProducts = () => {
 
 const useCartItems = () => useSelector(state => state.cart.value);
 
-export { useProducts, useCartItems };
+const useWishlistItems = () => useSelector(state => state.wishlist.value);
+
+export { useProducts, useCartItems, useWishlistItems };
