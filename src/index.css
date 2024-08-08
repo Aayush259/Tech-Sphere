@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply shadow bg-indigo-400;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-indigo-900 rounded-lg hover:bg-indigo-950 transition-all duration-200;
+}
+
 body {
     overflow-x:hidden;
 }
