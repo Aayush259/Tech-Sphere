@@ -25,7 +25,9 @@ export default function Cart() {
                     )
                 }
             </div>
-            <PlaceOrderWindow cartItems={cartItems} />
+            {
+                (cartItems.length > 0) ? (<PlaceOrderWindow cartItems={cartItems} />) : ""
+            }
         </div>
     );
 };
