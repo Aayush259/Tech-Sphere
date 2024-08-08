@@ -11,7 +11,7 @@ export default function CartItem({ productDetails }) {
     const { incrementItemCount, decrementItemCount, removeItemFromCart } = useCart(productDetails);
 
     // Getting functions to manage wishlist.
-    const { addItemInWishlist, removeItemFromWishlist, isItemInWishlist } = useWishlist(productDetails);
+    const { handleWishlistAction, isItemInWishlist } = useWishlist(productDetails);
 
     // Extracting product details.
     const {
@@ -22,15 +22,6 @@ export default function CartItem({ productDetails }) {
 
     // Product count in cart.
     const productCount = productDetails['count'];
-
-    // Function to handle wishlist actions.
-    const handleWishlistAction = () => {
-        if (isItemInWishlist) {
-            removeItemFromWishlist();
-        } else {
-            addItemInWishlist();
-        }
-    };
 
     return (
         <div

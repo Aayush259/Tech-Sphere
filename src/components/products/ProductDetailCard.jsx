@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import useCart from '../../hooks/useCart.js';
 import useExtract from '../../hooks/useExtract.js';
@@ -8,13 +7,10 @@ import useWishlist from '../../hooks/useWishlist.js';
 export default function ProductDetailCard({ productDetail }) {
 
     // Getting functions to manage cart.
-    const { addItemInCart, isItemInCart } = useCart(productDetail);
+    const { isItemInCart, handleCartAction } = useCart(productDetail);
 
     // Getting functions to manage wishlist.
-    const { addItemInWishlist, removeItemFromWishlist, isItemInWishlist } = useWishlist(productDetail);
-
-    // Navigate function.
-    const navigate = useNavigate();
+    const { handleWishlistAction, isItemInWishlist } = useWishlist(productDetail);
 
     // Extracting product details.
     const {
@@ -23,24 +19,6 @@ export default function ProductDetailCard({ productDetail }) {
         price: productPrice,
         image: productImg
     } = useExtract(productDetail);
-
-    // Function to handle cart actions to add and remove product from cart.
-    const handleCartBtnClick = () => {
-        if (isItemInCart) {
-            navigate('/Tech-Sphere/cart');
-        } else {
-            addItemInCart();
-        };
-    };
-
-    // Function to handle wishlist actions to add and remove product from wishlist.
-    const handleWishlistAction = () => {
-        if (isItemInWishlist) {
-            removeItemFromWishlist();
-        } else {
-            addItemInWishlist();
-        };
-    };
 
     return (
         <div
@@ -80,7 +58,7 @@ export default function ProductDetailCard({ productDetail }) {
 
                     <button
                         className="flex-grow bg-indigo-900 text-white hover:bg-white hover:text-indigo-900 py-3 px-2 border-2 rounded-3xl duration-200 border-indigo-900 uppercase"
-                        onClick={handleCartBtnClick}
+                        onClick={handleCartAction}
                     >
                         {
                             isItemInCart ? 'View in cart' : 'Add to cart'

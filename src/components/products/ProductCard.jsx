@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import useCart from '../../hooks/useCart.js';
@@ -9,13 +9,10 @@ import useWishlist from '../../hooks/useWishlist.js';
 export default function ProductCard({ productDetails }) {
 
     // Getting functions to manage cart.
-    const { addItemInCart, isItemInCart } = useCart(productDetails);
+    const { isItemInCart, handleCartAction } = useCart(productDetails);
 
     // Getting functions to manage wishlist.
-    const { addItemInWishlist, removeItemFromWishlist, isItemInWishlist } = useWishlist(productDetails);
-
-    // Navigate function.
-    const navigate = useNavigate();
+    const { handleWishlistAction, isItemInWishlist } = useWishlist(productDetails);
 
     // Extracting product details.
     const {
@@ -24,24 +21,6 @@ export default function ProductCard({ productDetails }) {
         price: productPrice,
         image: productImage,
     } = useExtract(productDetails);
-
-    // Function to handle cart actions to add and remove product from cart.
-    const handleCartAction = () => {
-        if (isItemInCart) {
-            navigate('/Tech-Sphere/cart')
-        } else {
-            addItemInCart();
-        };
-    };
-
-    // Function to handle wishlist actions to add and remove product from cart.
-    const handleWishlistAction = () => {
-        if (isItemInWishlist) {
-            removeItemFromWishlist();
-        } else {
-            addItemInWishlist();
-        };
-    };
 
     return (
         <div className="relative w-64 max-w-[80vw] p-4 pt-10 rounded-2xl shadow-product-card-shadow overflow-hidden duration-300">

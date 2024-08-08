@@ -27,9 +27,17 @@ const useWishlist = (item) => {
         return wishlistItems.some(item => item.id === id);
     }, [wishlistItems, id]);
 
+    // Function to handle wishlist actions.
+    const handleWishlistAction = () => {
+        if (isItemInWishlist) {
+            removeItemFromWishlist();
+        } else {
+            addItemInWishlist();
+        };
+    };
+
     return {
-        addItemInWishlist,
-        removeItemFromWishlist,
+        handleWishlistAction,
         isItemInWishlist
     };
 };

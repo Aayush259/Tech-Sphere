@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { addItem, decrementCount, incrementCount, removeItem } from '../app/features/cartSlice.js';
 import useExtract from './useExtract.js';
 
@@ -8,6 +9,7 @@ const useCart = (item) => {
     // Getting all cart items from store.
     const cartItems = useSelector(state => state.cart.value);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     // Getting item id.
     const { id } = useExtract(item);
@@ -37,12 +39,22 @@ const useCart = (item) => {
         return cartItems.some(item => item.id === id);
     }, [cartItems, id]);
 
+    // Function to handle cart action.
+    const handleCartAction = () => {
+        if (isItemInCart) {
+            navigate('/Tech-Sphere/cart');
+        } else {
+            addItemInCart();
+        };
+    };
+
     return {
         addItemInCart,
         removeItemFromCart,
         incrementItemCount,
         decrementItemCount,
-        isItemInCart
+        isItemInCart,
+        handleCartAction
     };
 };
 
