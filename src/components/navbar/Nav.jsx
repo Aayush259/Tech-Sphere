@@ -5,20 +5,16 @@ import NavigationLink from './NavigationLink.jsx';
 
 export default function Nav() {
 
+    // This function returns object with link text and its url.
+    const getNavigationLinkObject = (linkText, linkTo) => ({
+        linkText, linkTo
+    });
+
     // Array of navigation links text and their links.
     const navigationLinks = [
-        {
-            linkText: 'Products',
-            linkTo: 'products',
-        },
-        {
-            linkText: 'Wishlist',
-            linkTo: 'wishlist',
-        },
-        {
-            linkText: 'Cart',
-            linkTo: 'cart',
-        },
+        getNavigationLinkObject('Products', 'products'),
+        getNavigationLinkObject('Wishlist', 'wishlist'),
+        getNavigationLinkObject('Cart', 'cart'),
     ];
 
     // State for hamburger button.
@@ -75,8 +71,8 @@ export default function Nav() {
                 {
                     ['rotate-45 translate-y-2', 'opacity-0', '-rotate-45 -translate-y-[4px]'].map(twClassName => (
                         <div
-                        key={twClassName}
-                        className={`w-6 h-[2px] bg-white rounded duration-300 ${hamActive ? twClassName : ''}`}
+                            key={twClassName}
+                            className={`w-6 h-[2px] bg-white rounded duration-300 ${hamActive ? twClassName : ''}`}
                         ></div>
                     ))
                 }

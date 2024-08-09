@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useProducts } from '../../hooks/useStoreItems.js';
 import StatusCode from '../../app/utlis/StatusCode.js';
 import ProductDetailCard from './ProductDetailCard.jsx';
+import Loader from '../loader/Loader.jsx';
 
 export default function ProductDetail() {
 
@@ -39,7 +40,7 @@ export default function ProductDetail() {
             return (
                 <div className="min-h-[80vh] flex items-center justify-center">
                     {
-                        productDetail ? <ProductDetailCard productDetail={productDetail} /> : <div>Loading...</div>
+                        productDetail ? <ProductDetailCard productDetail={productDetail} /> : <Loader />
                     }
                 </div>
             );

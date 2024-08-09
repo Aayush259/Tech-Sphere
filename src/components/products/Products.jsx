@@ -2,6 +2,7 @@ import React from 'react';
 import { useProducts } from '../../hooks/useStoreItems.js';
 import ProductCard from './ProductCard.jsx';
 import StatusCode from '../../app/utlis/StatusCode.js';
+import Loader from '../loader/Loader.jsx';
 
 export default function Products() {
 
@@ -10,7 +11,7 @@ export default function Products() {
 
     switch (status) {
         case StatusCode.LOADING:
-            return <div>Loading...</div>;
+            return <Loader />;
 
         case StatusCode.ERROR:
             return <div>Error...</div>;
