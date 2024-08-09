@@ -6,15 +6,16 @@ import NavigationLink from './NavigationLink.jsx';
 export default function Nav() {
 
     // This function returns object with link text and its url.
-    const getNavigationLinkObject = (linkText, linkTo) => ({
-        linkText, linkTo
+    const getNavigationLinkObject = (linkIcon, linkText, linkTo) => ({
+        linkIcon, linkText, linkTo
     });
 
     // Array of navigation links text and their links.
     const navigationLinks = [
-        getNavigationLinkObject('Products', 'products'),
-        getNavigationLinkObject('Wishlist', 'wishlist'),
-        getNavigationLinkObject('Cart', 'cart'),
+        getNavigationLinkObject('fa-solid fa-boxes-stacked', 'Products', 'products'),
+        getNavigationLinkObject('fa-solid fa-heart', 'Wishlist', 'wishlist'),
+        getNavigationLinkObject('fa-solid fa-cart-shopping', 'Cart', 'cart'),
+        getNavigationLinkObject('fa-brands fa-github', 'GitHub', 'https://github.com/Aayush259'),
     ];
 
     // State for hamburger button.
@@ -83,7 +84,7 @@ export default function Nav() {
             >
                 {
                     navigationLinks.map(link => (
-                        <NavigationLink key={link['linkText']} linkText={link['linkText']} linkTo={link['linkTo']} setHamActive={setHamActive} />
+                        <NavigationLink key={link['linkText']} linkText={link['linkText']} linkTo={link['linkTo']} linkIcon={link['linkIcon']} setHamActive={setHamActive} />
                     ))
                 }
             </div>
