@@ -53,7 +53,7 @@ export default function Nav() {
         >
             <Link
                 to={'/Tech-Sphere/'}
-                className="flex flex-row items-center gap-3 relative z-30"
+                className="flex flex-row items-center gap-3 relative z-30 w-[70%] bg-indigo-950"
             >
                 <img src={appLogo} alt="Tech Sphere" className="w-12 rounded-full m-3 mx-0" />
 
