@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import img1 from '../../images/slider-1.jpg';
 import img2 from '../../images/slider-2.jpg';
 import img3 from '../../images/slider-3.jpg';
@@ -12,11 +12,11 @@ export default function Carousel() {
     const [currentSlide, setCurrentSlide] = useState(0);
 
     // Function to shift to next slide.
-    const nextSlide = () => {
+    const nextSlide = useCallback(() => {
         const isLastSlide = currentSlide === imgArray.length - 1;
         const nextSlideIndex = isLastSlide ? 0 : currentSlide + 1;
         setCurrentSlide(nextSlideIndex);
-    };
+    }, [imgArray, setCurrentSlide]);
 
     useEffect(() => {
         const sliderInterval = setInterval(() => {

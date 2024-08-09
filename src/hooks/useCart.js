@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addItem, decrementCount, incrementCount, removeItem } from '../app/features/cartSlice.js';
@@ -15,24 +15,24 @@ const useCart = (item) => {
     const { id } = useExtract(item);
 
     // Function to add item in cart.
-    const addItemInCart = () => {
+    const addItemInCart = useCallback(() => {
         dispatch(addItem(item));
-    };
+    }, [item, dispatch]);
 
     // Function to remove item from cart.
-    const removeItemFromCart = () => {
+    const removeItemFromCart = useCallback(() => {
         dispatch(removeItem(id));
-    };
+    }, [id, dispatch]);
 
     // Function to increment item count.
-    const incrementItemCount = () => {
+    const incrementItemCount = useCallback(() => {
         dispatch(incrementCount(id));
-    };
+    }, [id, dispatch]);
 
     // Function to decrement item count.
-    const decrementItemCount = () => {
+    const decrementItemCount = useCallback(() => {
         dispatch(decrementCount(id));
-    };
+    }, [id, dispatch]);
 
     // Function to check whether the item is present in cart.
     const isItemInCart = useMemo(() => {
@@ -40,13 +40,13 @@ const useCart = (item) => {
     }, [cartItems, id]);
 
     // Function to handle cart action.
-    const handleCartAction = () => {
+    const handleCartAction = useCallback(() => {
         if (isItemInCart) {
             navigate('/Tech-Sphere/cart');
         } else {
             addItemInCart();
         };
-    };
+    }, [navigate, addItemInCart]);
 
     return {
         addItemInCart,

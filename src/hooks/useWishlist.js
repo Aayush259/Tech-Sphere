@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useExtract from './useExtract.js';
 import { addItem, removeItem } from '../app/features/wishlistSlice.js';
@@ -13,14 +13,14 @@ const useWishlist = (item) => {
     const { id } = useExtract(item);
 
     // Function to add item in wishlist.
-    const addItemInWishlist = () => {
+    const addItemInWishlist = useCallback(() => {
         dispatch(addItem(item));
-    };
+    }, [item, dispatch]);
 
     // Function to remove item from wishlist.
-    const removeItemFromWishlist = () => {
+    const removeItemFromWishlist = useCallback(() => {
         dispatch(removeItem(id));
-    };
+    }, [id, dispatch]);
 
     // Function to check whether the item is present in wishlist.
     const isItemInWishlist = useMemo(() => {
