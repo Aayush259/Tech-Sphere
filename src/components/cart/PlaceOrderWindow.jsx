@@ -26,9 +26,10 @@ export default function PlaceOrderWindow({ cartItems }) {
         updateTotalPrice();
     }, [cartItems]);
 
-    const placeOrder = () => { 
+    // Function to place order.
+    const placeOrder = () => {
         setConfirmOrder(true);
-     }
+    };
 
     return (
         <>

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { add, remove, increment, decrement, empty } from '../reducers/cartReducers.js';
 
 const initialState = {
-    value: JSON.parse(localStorage.getItem('cartItems')) || [],
+    value: JSON.parse(localStorage.getItem('cart')) || [],
 };
 
 const cartSlice = createSlice({
