@@ -4,6 +4,7 @@ import { useProducts } from '../../hooks/useStoreItems.js';
 import StatusCode from '../../app/utlis/StatusCode.js';
 import ProductDetailCard from './ProductDetailCard.jsx';
 import Loader from '../loader/Loader.jsx';
+import Error from '../error/Error.jsx';
 
 export default function ProductDetail() {
 
@@ -35,7 +36,7 @@ export default function ProductDetail() {
 
     switch (status) {
         case StatusCode.ERROR:
-            return <div>Error...</div>;
+            return <Error />;
         default:
             return (
                 <div className="min-h-[80vh] flex items-center justify-center">

@@ -3,6 +3,7 @@ import { useProducts } from '../../hooks/useStoreItems.js';
 import ProductCard from './ProductCard.jsx';
 import StatusCode from '../../app/utlis/StatusCode.js';
 import Loader from '../loader/Loader.jsx';
+import Error from '../error/Error.jsx';
 
 export default function Products() {
 
@@ -14,7 +15,7 @@ export default function Products() {
             return <Loader />;
 
         case StatusCode.ERROR:
-            return <div>Error...</div>;
+            return <Error />;
 
         default:
             return (
