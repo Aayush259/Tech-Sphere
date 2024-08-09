@@ -8,7 +8,7 @@ const localStorageMiddleware = type => store => next => action => {
         const state = store.getState();
 
         // Updating local storage.
-        localStorage.setItem(type, JSON.stringify(state[type].value));
+        localStorage.setItem(type + 'Items', JSON.stringify(state[type].value));
     };
 
     return result;
