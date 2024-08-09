@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
-import Carousel from './Carousel.jsx';
-import HomeProducts from './HomeProducts.jsx';
+import Loader from '../loader/Loader.jsx';
+const Carousel = lazy(() => import('./Carousel.jsx'));
+const HomeProducts = lazy(() => import('./HomeProducts.jsx'));
 
 export default function Home() {
 
     return (
         <div>
-            <Carousel />
+            <Suspense fallback={<Loader />}>
+                <Carousel />
+            </Suspense>
 
             <h2
                 className="uppercase text-2xl md:text-3xl font-bold text-center my-10"
@@ -18,7 +21,9 @@ export default function Home() {
             <div
                 className="flex flex-row flex-wrap items-stretch justify-center gap-10 my-10 lg:gap-20"
             >
-                <HomeProducts />
+                <Suspense fallback={<Loader />}>
+                    <HomeProducts />
+                </Suspense>
             </div>
 
             <Link

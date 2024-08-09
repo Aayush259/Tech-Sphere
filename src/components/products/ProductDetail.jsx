@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { lazy, Suspense, useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useProducts } from '../../hooks/useStoreItems.js';
 import StatusCode from '../../app/utlis/StatusCode.js';
-import ProductDetailCard from './ProductDetailCard.jsx';
 import Loader from '../loader/Loader.jsx';
-import Error from '../error/Error.jsx';
+const ProductDetailCard = lazy(() => import('./ProductDetailCard.jsx'));
+const Error = lazy(() => import('../error/Error.jsx'));
 
 export default function ProductDetail() {
 
@@ -36,12 +36,20 @@ export default function ProductDetail() {
 
     switch (status) {
         case StatusCode.ERROR:
-            return <Error />;
+            return (
+                <Suspense fallback={<Loader />}>
+                    <Error />
+                </Suspense>
+            );
         default:
             return (
                 <div className="min-h-[80vh] flex items-center justify-center">
                     {
-                        productDetail ? <ProductDetailCard productDetail={productDetail} /> : <Loader />
+                        productDetail ? (
+                            <Suspense fallback={<Loader />}>
+                                <ProductDetailCard productDetail={productDetail} />
+                            </Suspense>
+                        ) : <Loader />
                     }
                 </div>
             );

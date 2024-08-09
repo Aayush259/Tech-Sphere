@@ -1,6 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { lazy, Suspense, useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import OrderConfirmed from './OrderConfirmed.jsx';
+import Loader from '../loader/Loader.jsx';
+const OrderConfirmed = lazy(() => import('./OrderConfirmed.jsx'));
 
 export default function PlaceOrderWindow({ cartItems }) {
 
@@ -58,7 +59,9 @@ export default function PlaceOrderWindow({ cartItems }) {
             <div
                 className={`${confirmOrder ? "block" : "hidden"} absolute top-0 left-0 z-20 w-screen min-h-screen bg-indigo-950 bg-opacity-45 flex items-center justify-center`}
             >
-                <OrderConfirmed />
+                <Suspense fallback={<Loader />}>
+                    <OrderConfirmed />
+                </Suspense>
             </div>
         </>
     );

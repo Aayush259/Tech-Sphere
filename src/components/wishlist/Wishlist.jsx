@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { useWishlistItems } from '../../hooks/useStoreItems.js';
-import ProductCard from '../products/ProductCard.jsx';
+import Loader from '../loader/Loader.jsx';
+const ProductCard = lazy(() => import('../products/ProductCard.jsx'));
 
 export default function Wishlist() {
 
@@ -11,19 +12,21 @@ export default function Wishlist() {
         <div
             className="flex flex-row flex-wrap items-stretch justify-center gap-10 my-10 lg:gap-20"
         >
-            {
-                wishlistItems.length > 0 ? (
-                    wishlistItems.map(item => (
-                        <ProductCard key={item['id']} productDetails={item} />
-                    ))
-                ) : (
-                    <div
-                        className="text-xl md:text-2xl font-semibold my-20 text-center text-indigo-900"
-                    >
-                        Nothing in wishlist.
-                    </div>
-                )
-            }
+            <Suspense fallback={<Loader />}>
+                {
+                    wishlistItems.length > 0 ? (
+                        wishlistItems.map(item => (
+                            <ProductCard key={item['id']} productDetails={item} />
+                        ))
+                    ) : (
+                        <div
+                            className="text-xl md:text-2xl font-semibold my-20 text-center text-indigo-900"
+                        >
+                            Nothing in wishlist.
+                        </div>
+                    )
+                }
+            </Suspense>
         </div>
     );
 };

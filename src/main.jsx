@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import ReactDOM from 'react-dom/client';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
-import './index.css';
-import App from './App.jsx';
-import Home from './components/home/Home.jsx';
-import Products from './components/products/Products.jsx';
-import ProductDetail from './components/products/ProductDetail.jsx';
-import Cart from './components/cart/Cart.jsx';
-import Wishlist from './components/wishlist/Wishlist.jsx';
 import { Provider } from 'react-redux';
 import store from './app/store/store.js';
+import './index.css';
+import App from './App.jsx';
+const Home = lazy(() => import('./components/home/Home.jsx'));
+const Products = lazy(() => import('./components/products/Products.jsx'))
+const ProductDetail = lazy(() => import('./components/products/ProductDetail.jsx'))
+const Cart = lazy(() => import('./components/cart/Cart.jsx'));
+const Wishlist = lazy(() => import('./components/wishlist/Wishlist.jsx'));
 
 library.add(fas, fab, far);
 

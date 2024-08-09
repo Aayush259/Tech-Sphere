@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import Nav from './components/navbar/Nav.jsx';
 import useScrollToTop from './hooks/useScrollToTop.js';
 import { useDispatch } from 'react-redux';
 import { getProducts } from './app/features/productSlice.js';
+import Nav from './components/navbar/Nav.jsx';
+import Loader from './components/loader/Loader.jsx';
 
 export default function App() {
 
@@ -19,7 +20,9 @@ export default function App() {
   return (
     <>
       <Nav />
-      <Outlet />
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };

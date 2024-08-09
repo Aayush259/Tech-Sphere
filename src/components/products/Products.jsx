@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { useProducts } from '../../hooks/useStoreItems.js';
-import ProductCard from './ProductCard.jsx';
 import StatusCode from '../../app/utlis/StatusCode.js';
 import Loader from '../loader/Loader.jsx';
-import Error from '../error/Error.jsx';
+const ProductCard = lazy(() => import('./ProductCard.jsx'));
+const Error = lazy(() => import('../error/Error.jsx'));
 
 export default function Products() {
 
@@ -15,18 +15,24 @@ export default function Products() {
             return <Loader />;
 
         case StatusCode.ERROR:
-            return <Error />;
+            return (
+                <Suspense fallback={<Loader />}>
+                    <Error />
+                </Suspense>
+            );
 
         default:
             return (
                 <div
                     className="flex flex-row flex-wrap items-stretch justify-center gap-10 my-10 lg:gap-20"
                 >
-                    {
-                        products.map(product => (
-                            <ProductCard key={product['id']} productDetails={product} />
-                        ))
-                    }
+                    <Suspense fallback={<Loader />}>
+                        {
+                            products.map(product => (
+                                <ProductCard key={product['id']} productDetails={product} />
+                            ))
+                        }
+                    </Suspense>
                 </div>
             );
     };
