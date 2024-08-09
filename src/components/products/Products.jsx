@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useCallback, useState } from 'react';
+import React, { lazy, Suspense, useCallback, useEffect, useState } from 'react';
 import { useProducts } from '../../hooks/useStoreItems.js';
 import StatusCode from '../../app/utlis/StatusCode.js';
 import Loader from '../loader/Loader.jsx';
@@ -24,6 +24,11 @@ export default function Products() {
             setProductsToDisplay(searchedProducts);
         }
     }, [products, setProductsToDisplay]);
+
+    // Update productsToDisplay when products changes.
+    useEffect(() => {
+        search();
+    }, [products]);
 
     switch (status) {
         case StatusCode.LOADING:
