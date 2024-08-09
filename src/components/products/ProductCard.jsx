@@ -61,19 +61,30 @@ export default function ProductCard({ productDetails }) {
                 </div>
 
                 <button
-                    className="bg-indigo-900 p-2 my-3 w-full block text-center text-white font-semibold rounded-3xl hover:bg-white hover:text-indigo-900 border-2 border-indigo-900 duration-200"
+                    className="bg-indigo-900 p-2 my-3 w-full flex flex-row items-center justify-center gap-2 text-white font-semibold rounded-3xl hover:bg-white hover:text-indigo-900 border-2 border-indigo-900 duration-200"
                     onClick={handleCartAction}
                 >
                     {
-                        isItemInCart ? 'Go to Cart' : 'Add To Cart'
+                        isItemInCart ? (
+                            <>
+                                Go to Cart
+                                <FontAwesomeIcon icon="fa-solid fa-cart-shopping" />
+                            </>
+                        ) : (
+                            <>
+                                Add To Cart
+                                <FontAwesomeIcon icon="fa-solid fa-cart-plus" />
+                            </>
+                        )
                     }
                 </button>
 
                 <Link
                     to={`/Tech-Sphere/products/${productId}`}
-                    className="bg-indigo-900 p-2 my-3 block text-center text-white font-semibold rounded-3xl hover:bg-white hover:text-indigo-900 border-2 border-indigo-900 duration-200"
+                    className="bg-indigo-900 p-2 my-3 flex items-center justify-center gap-2 text-white font-semibold rounded-3xl hover:bg-white hover:text-indigo-900 border-2 border-indigo-900 duration-200"
                 >
                     View Details
+                    <FontAwesomeIcon icon="fa-solid fa-circle-info" />
                 </Link>
             </div>
         </div>
