@@ -40,13 +40,13 @@ const useCart = (item) => {
     }, [cartItems, id]);
 
     // Function to handle cart action.
-    const handleCartAction = useCallback(() => {
+    const handleCartAction = () => {
         if (isItemInCart) {
             navigate('/Tech-Sphere/cart');
         } else {
             addItemInCart();
         };
-    }, [navigate, addItemInCart]);
+    };
 
     return {
         addItemInCart,
