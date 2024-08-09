@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { add, remove, increment, decrement } from '../reducers/cartReducers';
+import { add, remove, increment, decrement, empty } from '../reducers/cartReducers.js';
 
 const initialState = {
     value: JSON.parse(localStorage.getItem('cartItems')) || [],
@@ -13,9 +13,10 @@ const cartSlice = createSlice({
         removeItem: remove,
         incrementCount: increment,
         decrementCount: decrement,
+        emptyCart: empty
     },
 });
 
-export const { addItem, removeItem, incrementCount, decrementCount } = cartSlice.actions;
+export const { addItem, removeItem, incrementCount, decrementCount, emptyCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

@@ -48,4 +48,9 @@ const decrement = (state, action) => {
     };
 };
 
-export { add, remove, increment, decrement };
+// Reducer function to empty the cart.
+const empty = (state, action) => {
+    state.value = [];
+}
+
+export { add, remove, increment, decrement, empty };
