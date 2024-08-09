@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import './index.css';
 import App from './App.jsx';
@@ -14,7 +15,7 @@ import Wishlist from './components/wishlist/Wishlist.jsx';
 import { Provider } from 'react-redux';
 import store from './app/store/store.js';
 
-library.add(fas, fab);
+library.add(fas, fab, far);
 
 const router = createBrowserRouter(
   createRoutesFromElements(
