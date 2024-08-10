@@ -7,7 +7,7 @@ export default function Search({ search }) {
 
     return (
         <div
-            className="bg-white w-full sticky top-[72px] z-40 py-5"
+            className="bg-white w-full sticky top-[72px] z-20 py-5"
         >
             <label htmlFor="search" className="flex flex-row items-center justify-center text-lg  text-indigo-950 mx-auto w-fit">
                 <input
